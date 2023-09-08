@@ -1,0 +1,10 @@
+읕test
+   읕MAIN  0/206  Ram=0
+      쳐@cinit1  (Inline)  Ram=0
+      쳐GO_STRAIGHT  0/49  Ram=0
+      쳐TURN_RIGHT  0/45  Ram=0
+      쳐TURN_RIGHT  0/45  Ram=0
+      쳐TURN_LEFT  0/45  Ram=0
+      쳐TURN_LEFT  0/45  Ram=0
+      쳐STOP  0/43  Ram=0
+      읕STOP  0/43  Ram=0

@@ -1,0 +1,29 @@
+Code chuyển chế độ
+
+Nút A   ( dùng để kích hoạt code chạy )
+Nút B ( Dùng để chuyển chế độ )
+
+( Nút B chuyển chế độ nào, Nhấn nút A thì đoạn code chế độ đó chạy )
+
+4 chế độ :  
+chế độ :
+
+
+1:  led nhấy nháy ( nhả nút A led tắt )
+
+
+2: led nhấy nháy tần số ngẫu nhiên, nhấp nháy không đều ( nhả nút A led tắt )
+
+3: led nháy 3 lần rồi dừng, 1 giây sau led nháy 4 lần rồi dừng ( nhấn giữ nút A, quá trình lặp đi lặp lại )
+
+4: led nháy 5 lần rồi dừng, 1 giây sau led nháy 5 lần rồi dừng, 1 giây sau led nháy 5 lần rồi dừng ( nhấn giữ nút a, quá trình này lặp đi lặp lại )
+
+
+nút C : nhấn nút C sẽ chuyển sang chế độ 5 : Nhấn nút A led sáng mãi ( nhả nút nhấn A led tắt )
+nhấn lại nút C sẽ quay lại chế độ nút B vừa chuyển
+Ấn nút A, chế độ nào mà nút B vừa chuyển sẽ chạy tiếp.
+
+Tất cả các nút đều nhấn giữ
+nút B chuyển chế độ thì nhấn giữ tầm 2s mới chuyển. 
+( nút b chỉ chuyển 4 chế độ led như trên )
+còn nút C, chỉ kích hoạt riêng chế độ 5

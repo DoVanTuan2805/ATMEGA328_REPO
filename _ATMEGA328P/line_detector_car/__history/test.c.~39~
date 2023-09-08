@@ -1,0 +1,31 @@
+#INCLUDE <16F887.H>
+#include <string.h>
+#FUSES NOWDT, PUT, HS, NOPROTECT, NOLVP
+#USE DELAY(CLOCK=20M)
+#define s1 PIN_D0
+UNSIGNED INT16 value;
+VOID MAIN()
+{
+ SET_TRIS_C(0X00);
+ SET_TRIS_A(0XFF);
+ SETUP_TIMER_2(T2_DIV_BY_16,249,1);
+ SETUP_CCP1(CCP_PWM);
+ SETUP_CCP2(CCP_PWM);
+ value = 0;
+ SET_PWM1_DUTY(value);
+ SET_PWM2_DUTY(value);
+ OUTPUT_LOW(PIN_C3);
+ OUTPUT_LOW(PIN_C0);
+ WHILE(TRUE){
+ if(INPUT(s1) == 1) {
+ value = 500;
+ SET_PWM1_DUTY(value);
+ SET_PWM2_DUTY(value);
+ }
+ else{
+ value = 1000;
+ SET_PWM1_DUTY(value);
+ SET_PWM2_DUTY(value);
+ }
+ }
+}

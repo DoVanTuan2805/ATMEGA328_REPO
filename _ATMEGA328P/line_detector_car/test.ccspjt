@@ -1,0 +1,23 @@
+[PROJECT]
+Target=test.hex
+Processor_Text=PIC16F887
+CCSVersion=5.015
+Compiler=PCM
+[Target Data]
+FileList=test.c
+[Directories]
+Include=C:\Program Files (x86)\PICC\Devices\;C:\Program Files (x86)\PICC\Drivers\
+[test.c]
+Type=4
+[mru-list]
+1=test.c
+[Opened Files]
+1=line_dectector.c
+2=test.c
+3=..\..\..\..\..\Program Files (x86)\PICC\Devices\16F887.H
+4=..\..\..\..\..\Program Files (x86)\PICC\Drivers\stddef.h
+5=..\..\..\..\..\Program Files (x86)\PICC\Drivers\ctype.h
+6=
+[Units]
+Count=1
+1=test (main)

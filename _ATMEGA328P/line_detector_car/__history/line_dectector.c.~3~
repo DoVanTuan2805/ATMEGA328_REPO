@@ -1,0 +1,18 @@
+#INCLUDE <16F887.H>
+#include <string.h>
+#FUSES NOWDT, PUT, HS, NOPROTECT, NOLVP
+#USE DELAY(CLOCK=20M)
+int giatri1, giatri2, giatri3, giatri4, giatri5, gtcongtac, gthongngoai;
+void main(){
+set_tris_B(0xFF);
+
+}
+void main(){
+giatri1 = INPUT(PIN_B0);
+giatri2 = INPUT(PIN_B0);
+giatri3 = INPUT(PIN_B0);
+giatri4 = INPUT(PIN_B0);
+giatri5 = INPUT(PIN_B0);
+gtcongtac = INPUT(PIN_B0);
+gthongngoai = INPUT(PIN_B0);
+}
