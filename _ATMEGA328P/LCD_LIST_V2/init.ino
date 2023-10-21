@@ -35,6 +35,7 @@ void init_SD() {
     while (1)
       ;
   }
+
   if (SD.exists(filename)) {
     SD.remove(filename);
     Serial.print("Delete File : ");
@@ -59,6 +60,7 @@ void init_SD() {
     Serial.print(filename3);
     Serial.println();
   }
+
   txtFile = SD.open(filename, FILE_WRITE);
   delay(10);
   if (txtFile) {
@@ -81,7 +83,7 @@ void init_SD() {
 
   blueFile = SD.open(filename2, FILE_WRITE);
   delay(10);
-  if (txtFile) {
+  if (blueFile) {
     Serial.println("File Success");
     delay(10);
     blueFile.close();
