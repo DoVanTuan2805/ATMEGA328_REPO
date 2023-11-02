@@ -13,11 +13,17 @@ void zero_cross() {
   delayMicroseconds(100);
   digitalWrite(LAMP, LOW);
 }
+int data = 0;
 void loop() {
-  int data = analogRead(A0);
+  data += 5;
+  if (data >= 1023) {
+    data = 0;
+  }
+  Serial.println(data);
+  // int data = analogRead(A0);
   // int data1 = map(data, 0, 1023, 850, 1100);
   int data1 = map(data, 0, 1023, 0, 4500);
   // Serial.println(data1);
   dim_val = data1;
-  // delay(100);
+  delay(200);
 }

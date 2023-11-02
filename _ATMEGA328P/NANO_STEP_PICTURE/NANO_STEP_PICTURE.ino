@@ -19,7 +19,7 @@ LiquidCrystal_I2C lcd(0x27, 16, 2);  // set the LCD address to 0x27 for a 16 cha
 
 #define SHORT_TIME 50
 
-#define ONE_MM 80
+#define ONE_MM 335
 
 typedef struct {
   bool isPressing;
@@ -32,11 +32,11 @@ typedef struct {
 Button_t run, set, up, down, ctht;
 bool page = 0;
 uint8_t mode = 0;
-float speed = 0.1;
-uint16_t speedPicture = 1000; 
+float speed = 0.2;
+uint16_t speedPicture = 500; 
 
-int Distance = 30;
-int NOP = 90;
+int Distance = 200;
+int NOP = 50;
 int NOP_process = 0;
 
 bool interrupt_soft = 0;
@@ -106,7 +106,7 @@ void loop() {
         break;
       }
       digitalWrite(dirPin, LOW);
-      rotate_CTHT(3200, 0.2);
+      rotate_CTHT(3200, 2);
     }
   }
 

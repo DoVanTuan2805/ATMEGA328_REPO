@@ -3,7 +3,7 @@ void checkButton(Button_t *bt, uint16_t buttonMode) {
 
   if (bt->prevState == HIGH && bt->currState == LOW)  // press
   {
-    // Serial.println("Press");
+    Serial.println("Press");
     if (buttonMode == CTHT) {
       interrupt_soft = 1;
     }
@@ -12,7 +12,7 @@ void checkButton(Button_t *bt, uint16_t buttonMode) {
     bt->isShortDetected = false;
   } else if (bt->prevState == LOW && bt->currState == HIGH)  // release
   {
-    // Serial.println("Release");
+    Serial.println("Release");
     if (buttonMode == CTHT) {
       interrupt_soft = 0;
     }
@@ -20,7 +20,7 @@ void checkButton(Button_t *bt, uint16_t buttonMode) {
     bt->isPressing = false;
 
     if (bt->releaseTime - bt->pressTime > SHORT_TIME) {
-      // Serial.println("Detect button");
+      Serial.println("Detect button");
       if (buttonMode == SET) {
         runningBack = true;
         if (page == 0) {
@@ -54,7 +54,7 @@ void checkButton(Button_t *bt, uint16_t buttonMode) {
     if (millis() - bt->pressTime > SHORT_TIME) {
       if (buttonMode == UP) {
         if (mode == 0) {
-          if (Distance < 1000) {
+          if (Distance < 400) {
             Distance++;
           }
         }
@@ -79,7 +79,9 @@ void checkButton(Button_t *bt, uint16_t buttonMode) {
           }
         }
         if (mode == 1) {
-          NOP--;
+          if (NOP > 10) {
+            NOP--;
+          }
         }
         if (mode == 2) {
           if (speed > 0.2) {
