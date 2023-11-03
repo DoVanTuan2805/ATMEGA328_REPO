@@ -52,8 +52,8 @@ void getEncoder()
             }
             else if (mode == MODE_SETUP)
             {
+                lcd.clear();
                 modeInSetups--;
-
                 if (modeInSetups <= 1)
                 {
                     modeInSetups = 3;
@@ -95,8 +95,8 @@ void getEncoder()
             }
             else if (mode == MODE_SETUP)
             {
+                lcd.clear();
                 modeInSetups++;
-
                 if (modeInSetups >= 4)
                 {
                     modeInSetups = 1;
@@ -184,6 +184,7 @@ Mode_t checkButton(Button_t *bt, uint16_t buttonMode)
         }
 
         Serial.println(mode);
+        lcd.clear();
     }
 
     bt->prevState = bt->currState;

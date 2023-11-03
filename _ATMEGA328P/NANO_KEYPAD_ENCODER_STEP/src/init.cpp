@@ -25,5 +25,6 @@ void initSetup()
         angleData[i][3] = '.';
     }
     memset(speedData, '0', sizeof(speedData));
-    memset(pulseData, '0', sizeof(pulseData));
+
+    sprintf(pulseData, "%d", pulse);
 }

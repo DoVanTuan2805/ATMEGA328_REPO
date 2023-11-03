@@ -80,6 +80,10 @@ void getDataFromKeypad()
                         {
                             angleData[counterAngle][numArrayInput++] = '-';
                         }
+                        else
+                        {
+                            angleData[counterAngle][numArrayInput++] = key;
+                        }
                     }
                     else
                     {
