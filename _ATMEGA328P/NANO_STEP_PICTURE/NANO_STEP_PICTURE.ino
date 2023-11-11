@@ -33,7 +33,7 @@ Button_t run, set, up, down, ctht;
 bool page = 0;
 uint8_t mode = 0;
 float speed = 0.2;
-uint16_t speedPicture = 500; 
+uint16_t speedPicture = 500;
 
 int Distance = 200;
 int NOP = 50;
@@ -142,7 +142,7 @@ void loop() {
         Serial.print(DistanceOfPicture * ONE_MM);
         Serial.println();
         rotate_Picture(DistanceOfPicture * ONE_MM, speed);
-      } else {
+      } else if (takePictureComplete == false) {
         if (millis() - timeRelay >= speedPicture) {
           processLCD();
           countRelay++;

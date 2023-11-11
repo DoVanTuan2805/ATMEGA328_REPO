@@ -7,21 +7,21 @@ void mainLcd(bool page, uint8_t mode) {
       lcd.setCursor(0, 0);
       lcd.print(dataLine1);
       memset(dataLine1, 0, sizeof(dataLine1));
-      sprintf(dataLine2, "NOP:        %d  ", NOP);
+      sprintf(dataLine2, "NOS:        %d  ", NOP);
       lcd.setCursor(0, 1);
       lcd.print(dataLine2);
       memset(dataLine2, 0, sizeof(dataLine2));
-    } else if (mode == 1) {
+    } else if  '(mode == 1) {
       sprintf(dataLine1, "Distance:   %d  ", Distance);
       lcd.setCursor(0, 0);
       lcd.print(dataLine1);
       memset(dataLine1, 0, sizeof(dataLine1));
-      sprintf(dataLine2, "NOP:       >%d  ", NOP);
+      sprintf(dataLine2, "NOS:       >%d  ", NOP);
       lcd.setCursor(0, 1);
       lcd.print(dataLine2);
       memset(dataLine2, 0, sizeof(dataLine2));
     } else if (mode == 2) {
-      sprintf(dataLine1, "NOP:       %d  ", NOP);
+      sprintf(dataLine1, "NOS:       %d  ", NOP);
       lcd.setCursor(0, 0);
       lcd.print(dataLine1);
       memset(dataLine1, 0, sizeof(dataLine1));
@@ -67,13 +67,13 @@ void mainLcd(bool page, uint8_t mode) {
 void processLCD() {
   char dataLine1[16];
   char dataLine2[16];
-  sprintf(dataLine1, "Running...");
+  sprintf(dataLine1, "Running... %d", Distance);
   lcd.setCursor(0, 0);
   lcd.print(dataLine1);
   memset(dataLine1, 0, sizeof(dataLine1));
 
-  sprintf(dataLine2, "NOP:        %d  ", NOP);
-  sprintf(dataLine2, "NOP: %d   /%d   ", NOP_process, NOP);
+  sprintf(dataLine2, "NOS:        %d  ", NOP);
+  sprintf(dataLine2, "NOS: %d   /%d   ", NOP_process + 1, NOP);
   lcd.setCursor(0, 1);
   lcd.print(dataLine2);
   memset(dataLine2, 0, sizeof(dataLine2));

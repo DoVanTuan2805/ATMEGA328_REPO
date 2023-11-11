@@ -13,8 +13,9 @@ bool checkKeyPad, checkEncoder;
 void setup()
 {
   Serial.begin(9600);
-  initSetup();
   initLcd();
+  initSetup();
+
   Serial.println("START");
   // angleStep(-360);
   oldAngle = 0;

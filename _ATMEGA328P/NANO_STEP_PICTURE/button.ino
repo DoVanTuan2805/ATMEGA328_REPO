@@ -3,8 +3,9 @@ void checkButton(Button_t *bt, uint16_t buttonMode) {
 
   if (bt->prevState == HIGH && bt->currState == LOW)  // press
   {
-    Serial.println("Press");
+    //Serial.println("Press");
     if (buttonMode == CTHT) {
+      Serial.println("Press CTHT");
       interrupt_soft = 1;
     }
     bt->pressTime = millis();
@@ -12,8 +13,9 @@ void checkButton(Button_t *bt, uint16_t buttonMode) {
     bt->isShortDetected = false;
   } else if (bt->prevState == LOW && bt->currState == HIGH)  // release
   {
-    Serial.println("Release");
+    //Serial.println("Release");
     if (buttonMode == CTHT) {
+      Serial.println("Realse CTHT");
       interrupt_soft = 0;
     }
     bt->releaseTime = millis();

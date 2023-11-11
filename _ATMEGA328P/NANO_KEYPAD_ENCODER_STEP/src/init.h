@@ -2,6 +2,9 @@
 #include <Keypad.h>
 #include <LiquidCrystal_I2C.h>
 #include <stdint.h>
+#include <EEPROM.h>
+extern volatile float target_pulse;
+
 extern uint8_t currentStateCLK;
 extern uint8_t lastStateCLK;
 extern float newAngle;
@@ -69,3 +72,6 @@ void showLcdInput(uint8_t count);
 void showLCDSetupSpeed();
 void showLcdSetupPulse();
 void showLcdSetupOneAngle();
+
+void write_flash(const char *toStore, int startAddr);
+String read_flash(int startAddr);

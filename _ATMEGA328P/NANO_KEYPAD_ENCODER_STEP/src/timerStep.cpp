@@ -9,7 +9,7 @@ volatile float target_pulse = 0; // 360 angle = 1600 xung
 volatile uint16_t current_pulse = 0;
 volatile bool state = false;
 volatile bool step_on = true;
-
+volatile bool goHome = false;
 void initInteruptTimer1()
 {
     cli(); // tắt ngắt toàn cục
@@ -41,6 +41,7 @@ ISR(TIMER1_OVF_vect)
         TCCR1A = 0;
         TCCR1B = 0;
         TIMSK1 = 0;
+        goHome = true;
     }
 }
 void angleStep(float angleNew, float angleOld)

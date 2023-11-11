@@ -11,6 +11,7 @@ void initLcd()
 {
     lcd.init(); // initialize the lcd
     lcd.backlight();
+    lcd.clear();
 }
 void showLcdEncoder(float angle)
 {

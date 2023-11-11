@@ -128,7 +128,10 @@ void getDataFromKeypad()
                 else if (key == '#')
                 {
                     speedData[3] = '\0';
+                    // write eeprom
+                    write_flash(speedData, 10);
                     String s = String(speedData);
+
                     setupSpeed = s.toInt();
                     if (setupSpeed > 525)
                     {
@@ -154,7 +157,11 @@ void getDataFromKeypad()
                 else if (key == '#')
                 {
                     pulseData[6] = '\0';
+                    // write eeprom
+                    write_flash(pulseData, 40);
+
                     String s = String(pulseData);
+
                     pulse = s.toInt();
                     Serial.print("PULSE");
                     Serial.print(pulse);
@@ -175,6 +182,9 @@ void getDataFromKeypad()
                 {
                     oneAngle = 10.0;
                 }
+                String s1 = String(oneAngle);
+                // write eeprom
+                write_flash(s1.c_str(), 80);
             }
         }
     }
