@@ -21,8 +21,8 @@ extern char speedData[3];
 extern uint16_t setupSpeed;
 extern uint8_t numArraySpeed;
 /* SET UP PULSE */
-extern int pulse;
-extern char pulseData[5];
+extern uint64_t pulse;
+extern char pulseData[6];
 extern uint8_t numArrayPulse;
 /* SET UP PULSE */
 extern float oneAngle;

@@ -20,7 +20,6 @@ void initSetup()
     pinMode(DIR, OUTPUT);
     pinMode(PUL, OUTPUT);
 
-    target_pulse = 1600;
     initInteruptTimer1();
 
     lastStateCLK = digitalRead(CLK);
@@ -33,38 +32,38 @@ void initSetup()
     sprintf(pulseData, "%d", pulse);
 
     String speedStr = read_flash(10);
-    // Serial.println(speedStr);
+    Serial.println(speedStr);
     String pulseStr = read_flash(40);
-    // Serial.println(pulseStr);
+    Serial.println(pulseStr);
     String oneAngleStr = read_flash(80);
-    // Serial.println(oneAngleStr);
+    Serial.println(oneAngleStr);
 
     setupSpeed = speedStr.toInt();
     pulse = pulseStr.toInt();
     oneAngle = oneAngleStr.toFloat();
 
     sprintf(speedData, "%d", setupSpeed);
-    sprintf(pulseData, "%d", pulse);
+    sprintf(pulseData, "%ld", pulse);
 
-    lcd.setCursor(0, 0);
-    lcd.print("GO HOME ...");
-    while (1)
-    {
-        if (digitalRead(CTHT) == 0)
-        {
-            target_pulse = 0;
-            break;
-        }
-        else
-        {
-            if (goHome == true)
-            {
-                goHome = false;
-                target_pulse = 1600;
-                initInteruptTimer1();
-            }
-        }
-    }
+    // lcd.setCursor(0, 0);
+    // lcd.print("GO HOME ...");
+    // while (1)
+    // {
+    //     if (digitalRead(CTHT) == 0)
+    //     {
+    //         target_pulse = 0;
+    //         break;
+    //     }
+    //     else
+    //     {
+    //         if (goHome == true)
+    //         {
+    //             goHome = false;
+    //             target_pulse = 1600;
+    //             initInteruptTimer1();
+    //         }
+    //     }
+    // }
     mode = MODE_ENCOER;
     modeInSetup = MODEINSETUP_SPEED;
 }

@@ -74,7 +74,7 @@ void showLcdSetupPulse()
     lcd.print("MODE: CAI DAT ");
 
     lcd.setCursor(0, 1);
-    sprintf(data, "%c%c%c%c%c ", pulseData[0], pulseData[1], pulseData[2], pulseData[3], pulseData[4]);
+    sprintf(data, "%c%c%c%c%c%c ", pulseData[0], pulseData[1], pulseData[2], pulseData[3], pulseData[4], pulseData[5]);
     lcd.print("XUNG : ");
     lcd.print(data);
 

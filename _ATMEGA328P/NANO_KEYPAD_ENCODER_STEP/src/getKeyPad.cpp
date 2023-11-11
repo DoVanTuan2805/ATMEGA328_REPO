@@ -1,4 +1,5 @@
 #include <init.h>
+
 extern LiquidCrystal_I2C lcd;
 #define rows 4
 #define columns 3
@@ -22,9 +23,9 @@ static uint8_t numArraySpeed = 0;
 extern uint16_t setupSpeed;
 
 /* MODE : SETUP ->  PULSE*/
-static char pulseData[5];
+static char pulseData[6];
 static uint8_t numArrayPulse = 0;
-extern int pulse;
+extern uint64_t pulse;
 
 /* MODE : SETUP ->  ONE ANGLE*/
 extern float oneAngle;
@@ -144,11 +145,11 @@ void getDataFromKeypad()
             {
                 if ((key != '#') && (key != '.'))
                 {
-                    if (numArrayPulse < 5)
+                    if (numArrayPulse < 6)
                     {
                         pulseData[numArrayPulse++] = key;
                     }
-                    else if (numArrayPulse >= 5)
+                    else if (numArrayPulse >= 6)
                     {
                         numArrayPulse = 0;
                         pulseData[numArrayPulse++] = key;
@@ -164,7 +165,8 @@ void getDataFromKeypad()
 
                     pulse = s.toInt();
                     Serial.print("PULSE");
-                    Serial.print(pulse);
+                    
+                    Serial.print(s);
                     Serial.println();
                 }
             }

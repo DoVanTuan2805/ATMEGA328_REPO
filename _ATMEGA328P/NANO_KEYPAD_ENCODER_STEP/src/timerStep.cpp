@@ -4,9 +4,9 @@
 
 static uint16_t setupSpeed = 0;
 volatile uint16_t value_timer = 65000; // max 65525
-static int pulse = 1600;
+static uint64_t pulse;
 volatile float target_pulse = 0; // 360 angle = 1600 xung
-volatile uint16_t current_pulse = 0;
+volatile uint64_t current_pulse = 0;
 volatile bool state = false;
 volatile bool step_on = true;
 volatile bool goHome = false;
@@ -52,6 +52,7 @@ void angleStep(float angleNew, float angleOld)
     angle = abs(angle);
     // 360 = 1600
     // angle = ?
-    target_pulse = pulse * angle / 360.0;
+    target_pulse = pulse * (angle / 360.0);
+    Serial.println(target_pulse);
     initInteruptTimer1();
 }
