@@ -16,9 +16,9 @@ void setup() {  // Begin setup
   Serial.begin(9600);
   mySerial.begin(9600);
   pinMode(AC_pin, OUTPUT);
-  attachInterrupt(0, zero_cross_detect, RISING);
-  Timer1.initialize(freqStep);
-  Timer1.attachInterrupt(dim_check, freqStep);
+  attachInterrupt(0, zero_cross_detect, RISING);// ngắt ngoài nhận điểm zero
+  Timer1.initialize(freqStep);			// chạy tần timer 75hz
+  Timer1.attachInterrupt(dim_check, freqStep);// chạy timer -> chu kì T = 0.01
 }
 
 void zero_cross_detect() {
@@ -29,11 +29,13 @@ void zero_cross_detect() {
 
 void dim_check() {
   if (zero_cross == true) {
-    if (i >= dim) {
+	  // min 0% -> dim = 128 ---- i >= 128 -> 0.01  * 128 = 1.28s 	sáng
+	  // max 100% -> dim = 0---- i >= 0 -> 0.01  * 0 = 0.01s 		sáng 
+    if (i >= dim) {		
       digitalWrite(AC_pin, HIGH);
       i = 0;
       zero_cross = false;
-    } else {
+    } else {	
       i++;
     }
   }
@@ -46,7 +48,7 @@ void loop() {
 
   if (state == '0') {
     mySerial.println("0%");
-    dim = 128;
+    dim = 128;			// 0% = 128
   } else if (state == '1') {
     mySerial.println("10%");
     dim = 112;
