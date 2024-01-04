@@ -9,7 +9,7 @@ const int cash = 2; // connect blue wire to pin 15, purple to ground
 uint8_t pulse;
 uint8_t money = 0;
 uint8_t counter = 0;
-
+#define NUM_CABIN 6
 #define NUM_OF_SCREEN 4
 
 typedef enum
@@ -56,10 +56,18 @@ typedef enum
   BILL_S = 10000,
   BILL_L = 20000
 } CabinBill_t;
+CabinBill_t e_cabinhBill;
+typedef struct
+{
+  CabinHour_t e_cabinHour;
+  CabinSize_t e_cabinSize;
+  uint16_t bill_6H;
+  uint16_t bill_12H;
+} CabinInfor_t;
+CabinInfor_t cabinInfor[6];
 
-CabinHour_t cabinHour;
-CabinSize_t cabinSize;
-
+static uint8_t customerChoose;
+static uint16_t totalBill;
 void setup()
 {
   Serial.begin(9600);
@@ -68,6 +76,16 @@ void setup()
   lcd.init();
   lcd.backlight();
   lcd.clear();
+  for (int i = 0; i < NUM_CABIN / 2; i++)
+  {
+    cabinInfor[i].bill_6H = BILL_S;
+    cabinInfor[i].bill_12H = BILL_S * 2;
+  }
+  for (int j = NUM_CABIN / 2; j < NUM_CABIN; j++)
+  {
+    cabinInfor[j].bill_6H = BILL_L;
+    cabinInfor[j].bill_12H = BILL_L * 2;
+  }
 }
 void loop()
 {
@@ -101,15 +119,8 @@ void processInScreen(Screen_t screen, char dataKey, bool *slotCabin)
       Serial.println(numSlot);
       if (slotCabin[numSlot] == true)
       {
+        customerChoose = numSlot;
         page = SCREEN3;
-        if (numSlot < 3)
-        {
-          cabinSize = SIZE_S;
-        }
-        else
-        {
-          cabinSize = SIZE_L;
-        }
         lcd.clear();
       }
     }
@@ -119,13 +130,13 @@ void processInScreen(Screen_t screen, char dataKey, bool *slotCabin)
     if (dataKey == '1') // 6H
     {
       page = SCREEN4;
-      cabinHour = HOUR_6;
+      cabinInfor[customerChoose].e_cabinHour = HOUR_6;
       lcd.clear();
     }
     else if (dataKey == '2') // 12H
     {
       page = SCREEN4;
-      cabinHour = HOUR_12;
+      cabinInfor[customerChoose].e_cabinHour = HOUR_12;
       lcd.clear();
     }
   }
@@ -210,18 +221,17 @@ bool cabinhHour(bool *slot)
 }
 bool cabinhBill(bool *slot)
 {
-  lcd.setCursor(0, 0);
-  if (cabinHour == HOUR_6)
+  if (cabinInfor[customerChoose].e_cabinHour == HOUR_6)
   {
-    if (cabinSize == SIZE_S)
-    {
-    }
+    totalBill = cabinInfor[customerChoose].bill_6H;
   }
+  else if (cabinInfor[customerChoose].e_cabinHour == HOUR_12)
+  {
+    totalBill = cabinInfor[customerChoose].bill_12H;
+  }
+  lcd.setCursor(0, 0);
   lcd.print("TONG TIEN :  ");
-  lcd.setCursor(2, 2);
-  lcd.print("1 - GUI : 6H");
-  lcd.setCursor(2, 3);
-  lcd.print("2 - GUI : 12H");
+  lcd.print(totalBill);
   // lcd.setCursor(4, 0);
   // lcd.print("VUI LONG NHAP");
   // lcd.setCursor(5, 1);
