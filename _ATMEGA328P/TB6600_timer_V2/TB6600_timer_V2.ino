@@ -39,7 +39,7 @@ void initInteruptTimer1() {
   /*
   1 xung = 64/16Mhz = 4us
   */
-  TCNT1 = init_value_timer1;      // DEFAUL = 65500 go to 65536 = 37 -> 4us * 37 = 148 tràn 
+  TCNT1 = init_value_timer1;      // DEFAUL = 65500 go to 65536 = 37 -> 4us * 37 = 148us tràn 
   TIMSK1 = (1 << TOIE1);  // Overflow interrupt enable
   sei();                  // cho phép ngắt toàn cục
 }

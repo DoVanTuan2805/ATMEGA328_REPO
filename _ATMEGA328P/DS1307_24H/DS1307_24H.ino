@@ -11,14 +11,12 @@ int second, minute, hour, day, wday, month, year;
 void setup() {
   Wire.begin();
   /* cài đặt thời gian cho module */
-  setTime(11, 59, 0, 3, 13, 11, 23);  // 12:30:45 CN 08-02-2015
+  setTime(17, 10, 0, 6, 5, 1, 23);  // 12:30:45 CN 08-02-2015
   Serial.begin(9600);
 }
 
 void loop() {
-  /* Đọc dữ liệu của DS1307 */
   readDS1307();
-  /* Hiển thị thời gian ra Serial monitor */
   digitalClockDisplay();
   delay(1000);
 }
@@ -38,11 +36,9 @@ void readDS1307() {
   year = bcd2dec(Wire.read());
   year += 2000;
 }
-/* Chuyển từ format BCD (Binary-Coded Decimal) sang Decimal */
 int bcd2dec(byte num) {
   return ((num / 16 * 10) + (num % 16));
 }
-/* Chuyển từ Decimal sang BCD */
 int dec2bcd(byte num) {
   return ((num / 10 * 16) + (num % 10));
 }

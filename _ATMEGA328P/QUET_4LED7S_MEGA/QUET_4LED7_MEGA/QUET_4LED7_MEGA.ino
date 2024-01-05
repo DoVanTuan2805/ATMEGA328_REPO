@@ -63,6 +63,7 @@ void setup() {
   pinMode (SDI, OUTPUT);
   pinMode (LAT, OUTPUT);
   pinMode (CLK, OUTPUT);
+  
   noInterrupts();
   // Initialize Timer1
   timer1_compare_match = 65000;
