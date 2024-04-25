@@ -20,6 +20,7 @@ const int cash = 2; // blue wire to UNO, purple to ground
 #define NUM_PASSWORD 5
 #define TIMER_COUNT 65500
 #define TIME_OPEN_CLOSE 3000
+
 typedef enum
 {
   BILL_S = 10000,
@@ -79,6 +80,7 @@ bool cabinhError(CabinInfor_t *slotCabin);
 bool cabinhOpen(CabinInfor_t *slotCabin);
 bool cabinhClose(CabinInfor_t *slotCabin);
 bool cabinWaitQuestion(CabinInfor_t *slotCabin);
+
 static bool (*handleScreen[NUM_OF_SCREEN])(CabinInfor_t *slotCabin){
     [MAIN_LCD] = mainLcd,
     [CABIN_SHOW] = cabinShow,
@@ -143,27 +145,25 @@ void setup()
   lcd.init();
   lcd.backlight();
   lcd.clear();
-  for (int i = 0; i < NUM_CABIN / 2; i++)
+  for (int i = 0; i < NUM_CABIN / 2 + 1; i++) // 4 NHO
   {
     cabinInfor[i].slot = true;
     cabinInfor[i].bill_6H = BILL_S;
     cabinInfor[i].bill_12H = BILL_S * 2;
   }
-  for (int j = NUM_CABIN / 2; j < NUM_CABIN; j++)
+  for (int j = NUM_CABIN / 2 + 1; j < NUM_CABIN; j++) // 2 LON
   {
     cabinInfor[j].slot = true;
     cabinInfor[j].bill_6H = BILL_L;
     cabinInfor[j].bill_12H = BILL_L * 2;
   }
-  // setTime(17, 30, 0, 6, 5, 1, 23); // 12:30:45 CN 08-02-2015
+  // setTime(9, 42, 0, 2, 9, 1, 23); // 17:30:00 CN 5-1-2023
   dataHC05 = 0x00;
 }
 void loop()
 {
   readDS1307();
-  digitalWrite(INHIBIT, 0);
-  // dataHC05 |= (1 << 0);  // ON RELAY 1
-  // dataHC05 &= ~(1 << 0); // OFF RELAY 1
+  digitalWrite(INHIBIT, 1);
 
   keyPress = getKey();
   if (keyPress)
@@ -404,7 +404,7 @@ bool cabinShow(CabinInfor_t *slotCabin)
   lcd.setCursor(0, 0);
   lcd.print("1(S)   2(S)   3(S)");
   lcd.setCursor(0, 2);
-  lcd.print("4(L)   5(L)   6(L)");
+  lcd.print("4(S)   5(L)   6(L)");
 
   data = slotCabin[0].slot == true ? dataTrong : dataDay;
   lcd.setCursor(0, 1);
@@ -448,6 +448,7 @@ bool cabinhBill(CabinInfor_t *slotCabin)
     sprintf(data, "TIEN DA NHAN : %ld", money);
     lcd.setCursor(0, 1);
     lcd.print(data);
+    digitalWrite(INHIBIT, 0);
     while (true)
     {
       if (getMoney() == true)
@@ -533,6 +534,8 @@ bool cabinhOpen(CabinInfor_t *slotCabin)
 {
   lcd.setCursor(0, 0);
   lcd.print("TU DO DANG MO !");
+  // 0b 0000 0000 ->     0x00
+  // 0b 0000 0001
   dataHC05 |= (1 << customerChoose); // ON RELAY 1
   if (millis() - timWaitToOpen > TIME_OPEN_CLOSE)
   {
@@ -545,6 +548,8 @@ bool cabinhClose(CabinInfor_t *slotCabin)
 {
   lcd.setCursor(0, 0);
   lcd.print("TU DO DANG DONG !");
+  // 0b 0000 0001 -> 0x01
+  // 0b 0000 0000
   if (millis() - timeOpenToClose > TIME_OPEN_CLOSE)
   {
     dataHC05 &= ~(1 << customerChoose); // OFF RELAY 1
